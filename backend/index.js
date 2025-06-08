@@ -20,12 +20,6 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("Connected to MongoDB"))
 .catch((error) => console.error("MongoDB connection error:", error));
 
-app.listen(port, () => {
-	console.log(`Server running on port ${port}`);
-});
-
-
-
 //Image Storage Engine 
 const storage = multer.diskStorage({
   destination: './upload/images',
@@ -121,7 +115,7 @@ app.post('/login', async (req, res) => {
 
 
 //Create an endpoint at ip/auth for regestring the user & sending auth-token
-app.post('/signup', async (req, res) => {
+app.post('/signup/', async (req, res) => {
   console.log("Sign Up");
   let success = false;
   let check = await Users.findOne({ email: req.body.email });
