@@ -13,9 +13,20 @@ const secretKey = process.env.JWT_SECRET;
 app.use(express.json());
 
 // ✅ Allow only your frontend to access backend
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://shopper-frontend-nb70.onrender.com'
+];
+
 app.use(cors({
-	origin: "https://shopper-frontend-nb70.onrender.com",
-	credentials: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
 
 // ✅ Connect to MongoDB
@@ -26,7 +37,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("Connected to MongoDB"))
 .catch((error) => console.error("MongoDB connection error:", error));
 
-// ✅ Image upload setup (⚠️ Non-persistent on Render)
+// ✅ Image upload setup
 const storage = multer.diskStorage({
 	destination: './upload/images',
 	filename: (req, file, cb) => {
