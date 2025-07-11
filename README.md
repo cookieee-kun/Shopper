@@ -12,7 +12,7 @@ Shopper is a full-stack e-commerce website built using the **MERN** stack (Mongo
 - 🛒 Add or remove items from the cart
 - ✅ Simple checkout flow
 - 🔐 User authentication (Login/Register)
-- 🧑 Admin panel to manage products/orders (if implemented)
+- 🧑 Admin panel to manage products/orders 
 - ⚙️ Express REST API for backend services
 - ☁️ MongoDB Atlas cloud database
 - 🚀 Full deployment using Render
